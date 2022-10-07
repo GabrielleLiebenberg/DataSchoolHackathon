@@ -1,1 +1,1 @@
-%test
+pyrunfile('main.py')
