@@ -35,4 +35,7 @@ restaurant2_complete = pd.merge(restaurant2_temp, holidays_raw,
                                 on = 'date',
                                 how='left')
 
-print(restaurant2_complete.head(10))
+restaurant1_complete.to_csv('restaurant1_data.csv')
+restaurant2_complete.to_csv('restaurant2_data.csv')
+
+#print(restaurant2_complete.head(10))
