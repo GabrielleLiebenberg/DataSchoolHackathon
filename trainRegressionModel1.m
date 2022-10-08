@@ -1,4 +1,4 @@
-function [trainedModel, validationRMSE] = trainRegressionModel(trainingData)
+function [trainedModel, validationRMSE] = trainRegressionModel1(trainingData)
 % [trainedModel, validationRMSE] = trainRegressionModel(trainingData)
 % Returns a trained regression model and its RMSE. This code recreates the
 % model trained in Regression Learner app. Use the generated code to

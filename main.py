@@ -46,6 +46,8 @@ restaurant2_avg = restaurant2_complete.groupby(['date','Item Name']).aggregate(a
 
 restaurant1_avg.to_csv('restaurant1_avg_data.csv')
 restaurant2_avg.to_csv('restaurant2_avg_data.csv')
+restaurant1_complete.to_csv('restaurant1_data.csv')
+restaurant2_complete.to_csv('restaurant2_data.csv')
 
 #print(restaurant1_avg.head(10))
 
