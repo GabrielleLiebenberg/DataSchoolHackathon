@@ -81,7 +81,9 @@ restaurant2_avg.to_csv('restaurant2_avg_data.csv')
 
 #machine learning code:
 
-features = pd.read_csv('restaurant1_avg_data.csv', header=0, nrows=100)
+#start of do not touch (I have no idea what half of this does)
+
+features = pd.read_csv('restaurant1_avg_data.csv', header=0, nrows=1000)
 
 # One-hot encode the data using pandas get_dummies
 features = pd.get_dummies(features)
@@ -135,3 +137,31 @@ mape = 100 * (errors / test_labels)
 # Calculate and display accuracy
 accuracy = 100 - np.mean(mape)
 print('Accuracy:', round(accuracy, 2), '%.')
+
+#end of do not touch
+
+
+#import the data you want to predict from, nrows sets the number of rows to import
+res1_pred_data = pd.read_csv('restaurant1_avg_data.csv', header=0, nrows=1000)
+
+#format it to get rid of the strings and invalid cells
+data = pd.get_dummies(res1_pred_data)
+data.fillna(0)
+data[data > 1000000] = 0
+data = data.replace((np.inf, -np.inf, np.nan), 0).reset_index(drop=True)
+
+# Labels are the values we want to predict
+labels = np.array(data['Quantity'])
+# Remove the labels from the features
+# axis 1 refers to the columns
+data= data.drop('Quantity', axis = 1)
+
+# Saving feature names for later use
+feature_list = list(data.columns)
+# Convert to numpy array
+features = np.array(data)
+
+res1_pred = rf.predict(features)
+res1_pred_data['predicted'] = res1_pred.tolist()
+res1_pred_data.to_csv('restaurant1_pred_data.csv')
+#np.savetxt("restaurant1_predictions.csv", predictions, delimiter=",")
