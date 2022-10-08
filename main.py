@@ -1,6 +1,6 @@
 import pandas as pd
-import datetime
-#from pandas import datetime
+#import datetime
+from pandas import datetime
 
 # # evaluate an ARIMA model using a walk-forward validation
 # from matplotlib import pyplot
