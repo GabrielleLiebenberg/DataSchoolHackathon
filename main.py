@@ -1,6 +1,6 @@
 import pandas as pd
-#import datetime
-from pandas import datetime
+import datetime
+#from pandas import datetime
 
 # # evaluate an ARIMA model using a walk-forward validation
 # from matplotlib import pyplot
@@ -81,7 +81,7 @@ restaurant2_avg.to_csv('restaurant2_avg_data.csv')
 
 #machine learning code:
 
-features = pd.read_csv('restaurant1_avg_data.csv', header=0)
+features = pd.read_csv('restaurant1_avg_data.csv', header=0, nrows=100)
 
 # One-hot encode the data using pandas get_dummies
 features = pd.get_dummies(features)
@@ -121,4 +121,17 @@ x2 = np.all(np.isfinite(train_labels))
 x3 = np.where(np.isnan(train_features))
 x4 = np.all(np.isfinite(train_features))
 # Train the model on training data
-rf.fit(features, labels);
+rf.fit(train_features, train_labels);
+
+# Use the forest's predict method on the test data
+predictions = rf.predict(test_features)
+# Calculate the absolute errors
+errors = abs(predictions - test_labels)
+# Print out the mean absolute error (mae)
+print('Mean Absolute Error:', round(np.mean(errors), 2), 'degrees.')
+
+# Calculate mean absolute percentage error (MAPE)
+mape = 100 * (errors / test_labels)
+# Calculate and display accuracy
+accuracy = 100 - np.mean(mape)
+print('Accuracy:', round(accuracy, 2), '%.')
